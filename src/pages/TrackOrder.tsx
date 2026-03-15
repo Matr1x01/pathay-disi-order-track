@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useOrderTracking } from "@/lib/mock-api";
+import { useOrderTracking } from "@/lib/call-api";
 import OrderSummaryCard from "@/components/OrderSummaryCard";
 import OrderTimeline from "@/components/OrderTimeline";
 import MapWithMarkers from "@/components/MapWithMarkers";
@@ -51,7 +51,6 @@ const TrackOrder = () => {
             <CardContent className="p-6 text-center space-y-3">
               <XCircle className="h-10 w-10 text-destructive mx-auto" />
               <p className="font-semibold text-destructive">Something went wrong</p>
-              <p className="text-sm text-muted-foreground">কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।</p>
               <Button variant="outline" onClick={() => window.location.reload()}>Try Again</Button>
             </CardContent>
           </Card>
@@ -68,8 +67,6 @@ const TrackOrder = () => {
                 <h2 className="text-lg font-bold">Order Not Found</h2>
                 <p className="text-sm text-muted-foreground max-w-sm mx-auto">
                   We couldn't find an order with this ID or phone number. Please double check and try again.
-                  <br />
-                  <span className="text-xs">অর্ডার খুঁজে পাওয়া যায়নি। আইডি বা ফোন নম্বর পুনরায় চেক করুন।</span>
                 </p>
                 <TrackingInput className="pt-2" />
               </CardContent>
@@ -89,7 +86,7 @@ const TrackOrder = () => {
             {order.status === "delivered" && (
               <div className="flex items-center justify-center gap-2 bg-primary/10 text-primary rounded-xl px-4 py-3 text-sm font-semibold">
                 <CheckCircle className="h-5 w-5" />
-                <span>Parcel Delivered! ডেলিভারি সম্পন্ন ✓</span>
+                <span>Parcel Delivered ✓</span>
               </div>
             )}
 
@@ -101,7 +98,7 @@ const TrackOrder = () => {
               {/* Map */}
               <Card className="border-0 shadow-sm overflow-hidden">
                 <CardHeader className="p-4 pb-2">
-                  <CardTitle className="text-sm font-semibold">Live Map • লাইভ ম্যাপ</CardTitle>
+                  <CardTitle className="text-sm font-semibold">Live Map</CardTitle>
                 </CardHeader>
                 <CardContent className="p-3 pt-0">
                   <div className="h-[280px] sm:h-[320px]">
@@ -122,7 +119,7 @@ const TrackOrder = () => {
               {/* Timeline */}
               <Card className="border-0 shadow-sm">
                 <CardHeader className="p-4 pb-2">
-                  <CardTitle className="text-sm font-semibold">Tracking History • ট্র্যাকিং হিস্টোরি</CardTitle>
+                  <CardTitle className="text-sm font-semibold">Tracking History</CardTitle>
                 </CardHeader>
                 <CardContent className="p-4 pt-2">
                   <OrderTimeline steps={order.timeline} />
